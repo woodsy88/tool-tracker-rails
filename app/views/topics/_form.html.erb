@@ -1,0 +1,6 @@
+<%= form_for @topic do |f| %>
+  <%= f.text_field :title %>
+  
+  <%= f.submit(@topic.new_record? ? "Save Topic" : "Update Topic",
+                                class: "btn btn-primary btn-lg btn-xlarge") %>
+<% end %>

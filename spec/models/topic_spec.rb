@@ -12,10 +12,7 @@ RSpec.describe Topic, type: :model do
         expect(@topic).to_not be_valid
       end
 
-      it 'cannot be created without a slug' do
-        @topic.slug = nil
-        expect(@topic).to_not be_valid
-      end
+
     end
 
     describe 'callbacks' do
