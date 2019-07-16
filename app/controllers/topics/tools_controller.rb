@@ -1,4 +1,4 @@
-class ToolsController < ApplicationController
+class Topics::ToolsController < ApplicationController
   before_action :set_tool, only: [:edit, :show, :update, :destroy] 
  
  #petergate - authetication for different user roles at controller level

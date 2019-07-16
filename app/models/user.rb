@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   after_initialize :set_defaults
 
+  has_many :tools
+
   def full_name
     self.first_name + " " + self.last_name
   end         
