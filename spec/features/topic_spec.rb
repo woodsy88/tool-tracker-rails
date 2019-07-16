@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'navigate' do
   before do
-    @topic = Topic.create(title: "Version")
+    @topic = FactoryGirl.create(:topic)
   end
   describe 'index' do
     it 'can be reached succesfully' do
@@ -11,7 +11,7 @@ describe 'navigate' do
     end
 
     it 'renders a list of topics' do
-      Topic.create(title: "Coding")
+      FactoryGirl.create(:second_topic)
       visit topics_path
       expect(page).to have_content(/Version|Coding/)
     end
@@ -32,11 +32,11 @@ describe 'navigate' do
     end
 
     it 'should display the topic title' do
-      expect(page). to have_css('h2', text: 'Version')
+      expect(page). to have_css('h2', text: 'Email')
     end
     
     it 'should have a url that matches the custom url slug' do
-      expect(current_path).to have_content('version')
+      expect(current_path).to have_content('email')
     end
   end
 
