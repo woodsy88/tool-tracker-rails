@@ -10,9 +10,13 @@ Rails.application.routes.draw do
   
   resources :topics do
     scope module: :topics do
-      resources :tools 
+      resources :tools, except: [:new, :create] 
     end
   end
+
+    # url / route      controller              path
+  get 'tools/new', to: 'topics/tools#new', as: 'new_tool'
+  post 'tools', to: 'topics/tools#create', as: 'create_tool'
 
   get 'pages/home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

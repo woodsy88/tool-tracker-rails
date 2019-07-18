@@ -1,30 +1,26 @@
 class Topics::ToolsController < ApplicationController
   before_action :set_tool, only: [:edit, :show, :update, :destroy] 
+  before_action :set_topic, except: [:new, :create]
  
- #petergate - authetication for different user roles at controller level
- access all: [:show, :index], user: {except: [:destroy, :new, :create, :update, :edit, :sort]}, site_admin: :all
-
     def index
-        @tools = Tool.all
+      @tools = @topic.tools
     end
 
     def new
-        @tool = Tool.new
     end
 
-    def show
-        
+    def show   
     end
 
     def create
-        @tool = Tool.new(tool_params)
-        respond_to do  |format|
-            if @tool.save
-                format.html {redirect_to(tools_path)}
-            else
-                format.html { render 'new' }
-            end
-        end        
+        tool = Tool.new(tool_params)
+        tool.user_id = current_user.id
+
+        if tool.save
+            redirect_to topic_tool_path(topic_id: tool.topic_id, id: tool), notice: 'Your tool was successfully published.'
+        else
+            render :new
+        end      
     end
 
     def edit    
@@ -41,21 +37,26 @@ class Topics::ToolsController < ApplicationController
         respond_to do |format|
             if @tool.update(tool_params)
                 format.html { redirect_to (tools_path) }
-                else
+              else
                 format.html { render :edit }
             end  
         end           
     end
 
-    private
+private
 
     def set_tool
-        @tool = tool.find(params[:id])
+        @tool = Tool.find(params[:id])
+    end
+
+    def set_topic
+        @topic = Topic.friendly.find(params[:topic_id])
     end
 
     def tool_params
         params.require(:tool).permit(:title, 
                                     :description, 
+                                    :topic_id,
                                     # :body, 
                                     # :position,
                                     # :date_text,

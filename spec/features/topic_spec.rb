@@ -42,6 +42,8 @@ describe 'navigate' do
 
   describe 'form' do
     before do
+      user = FactoryGirl.create(:user)
+      login_as(user, :scope => :user)
       visit new_topic_path
     end
 

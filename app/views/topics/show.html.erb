@@ -1,1 +1,7 @@
 <h2><%= @topic.title %></h2>
+
+<% @topic.tools.each do |tool| %>
+   <%= link_to tool.title, topic_tool_path(topic_id: @topic, id: tool) %>
+<% end %>
+
+<%= link_to 'New Tool', new_tool_path(topic_id: @topic.id) %>

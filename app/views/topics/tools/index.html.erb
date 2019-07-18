@@ -1,1 +1,7 @@
-<%= @tools.inspect %>
+<% @tools.each do |tool| %>
+  <%= link_to tool.title, topic_tool_path(topic_id: @topic, id: tool) %>
+  <%= tool.description %>
+  <%= tool.user.username %>
+<% end %>
+
+<%= link_to 'New Tool', new_tool_path(topic_id: @topic.id) %>
