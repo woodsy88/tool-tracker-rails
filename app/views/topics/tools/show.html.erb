@@ -2,4 +2,6 @@
 <p><%= @tool.topic.title %></p>
 <p><%= @tool.user.full_name %></p>
 
-<%= link_to 'Edit Tool', edit_topic_tool_path(topic_id: @topic.id, id: @tool.id) %>
+<% if current_user && @tool.user_id == current_user.id %>
+  <%= link_to 'Edit Tool', edit_topic_tool_path(topic_id: @topic.id, id: @tool.id) %>
+<% end %>

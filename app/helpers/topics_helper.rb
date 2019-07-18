@@ -5,7 +5,7 @@ module TopicsHelper
     return topic_tool_path(topic_id: @topic.id, id: @tool.id) if source == 'edit'
   end
 
-  def form_action
+  def form_action(source)
     return 'post' if source == 'new'
     return 'put' if source == 'edit'
   end

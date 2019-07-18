@@ -75,17 +75,23 @@ describe 'tool' do
       click_on "Save"
 
       expect(page).to have_content("Jon Snow")
+    end
+    
+    it 'should only allow sign in users to view the form' do
+      logout(:user)
+      visit new_tool_path
+      expect(current_path).to eq(new_user_session_path)
     end    
   end
 
   describe 'editing' do
     before do
       user = FactoryGirl.create(:user)
-      second_user = FactoryGirl.create(:second_user)
+      @second_user = FactoryGirl.create(:second_user)
       login_as(user, :scope => :user)
 
-      tool = Tool.create!(title: "start title", description: "starter description", topic_id: @topic.id, user_id: user.id)
-      visit edit_topic_tool_path(topic_id: @topic.id, id: tool.id)
+      @tool = Tool.create!(title: "start title", description: "starter description", topic_id: @topic.id, user_id: user.id)
+      visit edit_topic_tool_path(topic_id: @topic.id, id: @tool.id)
     end
 
     it 'allows a user to edit a tool they created' do
@@ -95,8 +101,17 @@ describe 'tool' do
       expect(page).to have_content("Hootsuite")
     end
 
-    xit 'does not allow a user to edit a post they did not create' do
-      
+    it 'does not allow a user to access the edit page if they are not signed in' do
+      logout(:user)
+      visit edit_topic_tool_path(topic_id: @topic.id, id: @tool.id)
+      expect(current_path).to eq(new_user_session_path)
+    end
+
+    it 'does not allow a user to edit a tool they did not create' do
+      logout(:user)
+      login_as(@second_user, :scope => :user)
+      visit edit_topic_tool_path(topic_id: @topic.id, id: @tool.id)
+      expect(current_path).to eq(topic_tool_path(topic_id: @topic.id, id: @tool.id))
     end
   end
 end
