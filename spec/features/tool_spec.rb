@@ -77,4 +77,26 @@ describe 'tool' do
       expect(page).to have_content("Jon Snow")
     end    
   end
+
+  describe 'editing' do
+    before do
+      user = FactoryGirl.create(:user)
+      second_user = FactoryGirl.create(:second_user)
+      login_as(user, :scope => :user)
+
+      tool = Tool.create!(title: "start title", description: "starter description", topic_id: @topic.id, user_id: user.id)
+      visit edit_topic_tool_path(topic_id: @topic.id, id: tool.id)
+    end
+
+    it 'allows a user to edit a tool they created' do
+      fill_in 'tool[title]', with: "Hootsuite"
+      click_on "Save"
+
+      expect(page).to have_content("Hootsuite")
+    end
+
+    xit 'does not allow a user to edit a post they did not create' do
+      
+    end
+  end
 end

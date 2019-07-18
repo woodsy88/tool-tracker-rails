@@ -1,14 +1,1 @@
-<%= form_tag create_tool_path, method: 'post' do %>
-
-  <%= text_field_tag "tool[title]" %>
-  <%= text_field_tag "tool[description]" %>
-  <%= collection_select(:tool, 
-                        :topic_id, 
-                        Topic.all, 
-                        :id, 
-                        :title,
-                        { selected: (params[:topic_id] if params[:topic_id]) }) %>
-
-  <%= submit_tag 'Save' %>
-
-<% end %>
+<%= render partial: 'form', locals: { source: 'new' } %>

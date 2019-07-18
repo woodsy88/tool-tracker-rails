@@ -1,15 +1,12 @@
 class Topics::ToolsController < ApplicationController
-  before_action :set_tool, only: [:edit, :show, :update, :destroy] 
   before_action :set_topic, except: [:new, :create]
+  before_action :set_tool, only: [:show, :edit, :update, :destroy] 
  
     def index
       @tools = @topic.tools
     end
 
     def new
-    end
-
-    def show   
     end
 
     def create
@@ -23,7 +20,10 @@ class Topics::ToolsController < ApplicationController
         end      
     end
 
-    def edit    
+    def show   
+    end    
+
+    def edit 
     end
 
     def destroy
@@ -34,33 +34,29 @@ class Topics::ToolsController < ApplicationController
     end
 
     def update
-        respond_to do |format|
-            if @tool.update(tool_params)
-                format.html { redirect_to (tools_path) }
-              else
-                format.html { render :edit }
-            end  
-        end           
+        @tool = @topic.tools.find(params[:id])
+
+        if @tool.update(tool_params)
+            redirect_to topic_tool_path(topic_id: @tool.topic_id, id: @tool), notice: 'Your tool was successfully updated.'
+        else
+            render :edit, notice: 'There was an error processing your request!'
+        end        
     end
 
 private
-
-    def set_tool
-        @tool = Tool.find(params[:id])
-    end
 
     def set_topic
         @topic = Topic.friendly.find(params[:topic_id])
     end
 
+    def set_tool
+        @tool = @topic.tools.find(params[:id])
+    end    
+
     def tool_params
         params.require(:tool).permit(:title, 
                                     :description, 
                                     :topic_id,
-                                    # :body, 
-                                    # :position,
-                                    # :date_text,
-                                    # skill_ids: []
                                     )
     end  
 

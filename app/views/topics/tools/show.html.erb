@@ -1,3 +1,5 @@
 <h2><%= @tool.title %></h2>
 <p><%= @tool.topic.title %></p>
 <p><%= @tool.user.full_name %></p>
+
+<%= link_to 'Edit Tool', edit_topic_tool_path(topic_id: @topic.id, id: @tool.id) %>

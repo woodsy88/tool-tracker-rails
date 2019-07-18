@@ -1,0 +1,12 @@
+<%= form_tag form_route(source), method: form_action(source) do %>
+  <%= text_field_tag "tool[title]", (@tool.title if @tool) || "" %>
+  <%= text_field_tag "tool[description]", (@tool.description if @tool) || "" %>
+  <%= collection_select(:tool, 
+                        :topic_id, 
+                        Topic.all, 
+                        :id, 
+                        :title,
+                        { selected: (params[:topic_id] if params[:topic_id]) }) %>
+
+  <%= submit_tag 'Save' %>
+<% end %>
