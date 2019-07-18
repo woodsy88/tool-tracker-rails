@@ -79,3 +79,4 @@ gem 'jquery-rails'
 gem 'devise' 
 
 gem 'friendly_id', '~> 5.2', '>= 5.2.5'
+gem 'gritter', '~> 1.2'
