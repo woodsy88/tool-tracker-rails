@@ -25,10 +25,18 @@ class Topics::ToolsController < ApplicationController
     end    
 
     def edit 
-      if @tool.user_id != current_user.id
-        redirect_to topic_tool_path(topic_id: @tool.topic_id, id: @tool), notice: 'you are not authorized'
-      end
+      authorize @tool
     end
+
+    def update
+      @tool = @topic.tools.find(params[:id])
+      authorize @tool
+      if @tool.update(tool_params)
+          redirect_to topic_tool_path(topic_id: @tool.topic_id, id: @tool), notice: 'Your tool was successfully updated.'
+      else
+          render :edit, notice: 'There was an error processing your request!'
+      end        
+    end    
 
     def destroy
       @tool.destroy
@@ -37,15 +45,7 @@ class Topics::ToolsController < ApplicationController
       end        
     end
 
-    def update
-      @tool = @topic.tools.find(params[:id])
 
-      if @tool.update(tool_params)
-          redirect_to topic_tool_path(topic_id: @tool.topic_id, id: @tool), notice: 'Your tool was successfully updated.'
-      else
-          render :edit, notice: 'There was an error processing your request!'
-      end        
-    end
 
 private
 

@@ -80,3 +80,4 @@ gem 'devise'
 
 gem 'friendly_id', '~> 5.2', '>= 5.2.5'
 gem 'gritter', '~> 1.2'
+gem 'pundit', '~> 2.0', '>= 2.0.1'

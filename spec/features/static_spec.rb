@@ -19,6 +19,7 @@ describe 'header' do
   end
 
   it 'displays a welcome message to guest users' do
+    visit root_path
     expect(page).to have_content("Guest")
   end  
 end

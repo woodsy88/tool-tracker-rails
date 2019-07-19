@@ -111,7 +111,7 @@ describe 'tool' do
       logout(:user)
       login_as(@second_user, :scope => :user)
       visit edit_topic_tool_path(topic_id: @topic.id, id: @tool.id)
-      expect(current_path).to eq(topic_tool_path(topic_id: @topic.id, id: @tool.id))
+      expect(current_path).to eq(root_path)
     end
   end
 end
