@@ -30,7 +30,7 @@ class TopicsController < ApplicationController
     if @topic.update(topic_params)
       redirect_to topic_path(@topic), notice: 'Your Topic was successfully created'
     else
-      render :edit, notice: 'There was an errir processing your request'
+      render :edit, notice: 'There was an error processing your request'
     end
   end
 
