@@ -1,4 +1,5 @@
 <div>
-  <%= link_to topic.title, topic %>
+  <%= link_to topic.title, topic_tools_path(topic_id: topic) %>
+  <%= topic.tools.count %> tools
 </div>
 

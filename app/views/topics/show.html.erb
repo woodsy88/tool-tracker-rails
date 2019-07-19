@@ -1,7 +1,19 @@
-<h2><%= @topic.title %></h2>
-
-<% @topic.tools.each do |tool| %>
-   <%= link_to tool.title, topic_tool_path(topic_id: @topic, id: tool) %>
-<% end %>
-
-<%= link_to 'New Tool', new_tool_path(topic_id: @topic.id) %>
+<div class="container">
+  <h2><%= link_to @topic.title, topic_tools_path(@topic) %></h2>
+  
+  <h2>Recent Tools Added</h2>
+  <div class="row">
+  <% @topic.tools.recent.featured_tools.each do |tool| %>
+    <div class="col-md-3">
+      <div class="card mt-3" style="wdith: 100%">
+        <div class="card-body">
+           <%= link_to tool.title, topic_tool_path(topic_id: @topic, id: tool) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+  
+  <%= link_to 'All Tools', topic_tools_path(@topic), class: "btn btn-dark mt-5" %>
+  <%= link_to 'Add New Tool', new_tool_path(topic_id: @topic.id), class: "btn btn-primary mt-5" %>
+</div>
