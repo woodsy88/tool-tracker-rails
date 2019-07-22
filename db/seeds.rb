@@ -6,9 +6,6 @@ end
 
 puts "50 Topics created"
 
-
-
-
 User.create!(
   email: "user1@test.com",
   password: "asdfasdf",
@@ -17,8 +14,6 @@ User.create!(
   last_name: "Snow",
   username: "wallwatcher",
 )
-
-
 
 User.create!(
   email: "user2@test.com",
@@ -41,10 +36,6 @@ AdminUser.create!(
 )
 
 puts "Admin user created"
-
-puts "Student user created"
-
-
 
 50.times do |tool|
   Tool.create!(

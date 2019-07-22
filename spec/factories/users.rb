@@ -24,4 +24,5 @@ FactoryGirl.define do
     last_name "Snow"
     username { generate :username }
   end
+
 end

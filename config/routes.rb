@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   
 
+  namespace :admin do
+      resources :users
+      resources :tools
+      resources :topics
+      resources :admin_users
+
+      root to: "users#index"
+    end
   devise_scope :user do
     get 'login', to: 'devise/sessions#new'
     get 'signup', to: 'devise/registrations#new'
