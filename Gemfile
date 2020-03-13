@@ -82,5 +82,5 @@ gem 'friendly_id', '~> 5.2', '>= 5.2.5'
 gem 'gritter', '~> 1.2'
 gem 'pundit', '~> 2.0', '>= 2.0.1'
 
-gem 'administrate', '~> 0.11.0'
+gem 'administrate', '~> 0.13.0'
 gem 'bourbon'
